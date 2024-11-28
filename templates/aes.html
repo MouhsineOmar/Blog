@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Algorithme AES</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/cesar-styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Algorithme AES</h1>
+        
+        <form method="post" action="{{ url_for('aes') }}">
+            <label for="key">Clé :</label>
+            <input type="text" id="key" name="key" required><br>
+
+            {% if error_message %}
+                <p style="color: red;">{{ error_message }}</p>
+            {% endif %}
+
+            <label for="plaintext">Texte clair ou chiffré (128 bits en hexadécimal) :</label>
+            <input type="text" id="plaintext" name="plaintext" required><br>
+
+            <label for="choice">Action :</label>
+            <select id="choice" name="choice">
+                <option value="E">Chiffrement</option>
+                <option value="D">Déchiffrement</option>
+            </select><br>
+
+            <input type="submit" value="E/D">
+            <a href="{{ url_for('index') }}" class="back-button">Retour</a>
+        </form>
+
+        {% if choice %}
+            {% if choice == "E" %}
+            <div class="result">
+                <h2>Résultat :</h2>
+                <p><br>{{ ciphertext }}<br></p>
+                <form method="post" action="{{ url_for('decrypt_password') }}">
+                    <input type="hidden" name="ciphertext" value="{{ ciphertext }}">
+                    <input type="hidden" name="key" value="{{ key }}">
+                    <input type="submit" value="Déchiffrer le mot de passe">
+                </form>
+            </div>
+            {% elif choice == "D" %}
+            <div class="result">
+                <h2>Résultat :</h2>
+                <p><br>Texte déchiffré (en hexadécimal) : {{ decrypted_text }}<br></p>
+            </div>
+            {% endif %}
+        {% endif %}
+    </div>
+</body>
+</html>

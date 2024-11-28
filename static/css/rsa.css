@@ -1,0 +1,102 @@
+/* cesar-styles.css */
+
+body {
+    font-family: 'Arial', sans-serif;
+    /* background-color: #f8f8f8; */
+    background-image: url("/static/Noir.png"); /* Adjust the path if needed */
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+h1 {
+    color: #fafafa;
+    text-align: center;
+}
+
+form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    margin-top: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+}
+
+input, select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 16px;
+    box-sizing: border-box;
+}
+
+button {
+    background-color: #36b410;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #61ff05;
+}
+
+h2 {
+    color: #4caf50;
+    margin-top: 20px;
+}
+
+h2 {
+    color: #4caf50;
+    margin-top: 20px;
+}
+
+.result {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+    width: 300px;
+    text-align: center;
+}
+
+.result p {
+    color: #110391;
+    margin-top: 10px;
+    font-size: 22px;
+    font-weight: bold;
+}
+/* static/css/styles.css */
+
+.back-button {
+    display: inline-block;
+    padding: 8px 18px;
+    background-color: #3498db; /* Couleur bleue */
+    color: #fff; /* Couleur du texte en blanc */
+    text-decoration: none;
+    border-radius: 5px; /* Coins arrondis */
+    transition: background-color 0.3s ease; /* Animation de transition pour la couleur de fond */
+
+    /* Ajoutez d'autres styles selon vos besoins */
+}
+
+.back-button:hover {
+    background-color: #2980b9; /* Couleur bleue légère au survol */
+}
+.footer {
+    margin-top: auto; /* Pousse le footer en bas */
+   
+}

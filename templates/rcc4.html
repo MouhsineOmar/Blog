@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RC4 Encryption</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/hill-styles.css') }}">
+</head>
+<body> 
+    <div class="container">
+        <h1>Algorithme RC4</h1>
+
+        <form method="post" action="{{ url_for('rcc4') }}">
+            <label for="key">Clé:</label>
+            <input type="text" name="key" required placeholder="ex:1,0,0,1"><br>
+
+            <label for="plaintext">Saisir un message:</label>
+            <input type="text" name="plaintext" required placeholder="ex:1,2,2,2"><br>
+
+            <label for="n">n = </label>
+            <input type="number" name="n" required><br>
+
+            <select name="action" required>
+                <option value="chiffrement">Chiffrement</option>
+                <option value="dechiffrement">Déchiffrement</option>
+            </select><br>
+
+            <input type="submit" value="Chiffrer/Déchiffrer">
+            <a href="{{ url_for('index') }}" class="back-button">Retour</a>
+        </form>
+
+        {% if result %}
+        <div class="result">
+            <h2>Résultat :</h2>
+            <p><b>{{ result }}</b></p>
+
+            {% if action == 'chiffrement' %}
+            <form method="post" action="{{ url_for('rcc4') }}">
+                <input type="hidden" name="key" value="{{ key }}">
+                <input type="hidden" name="plaintext" value="{{ result }}">
+                <input type="hidden" name="n" value="{{ n }}">
+                <input type="hidden" name="action" value="dechiffrement">
+                <input type="submit" value="Déchiffrer le texte">
+            </form>
+            {% elif action == 'dechiffrement' %}
+            <form method="post" action="{{ url_for('rcc4') }}">
+                <input type="hidden" name="key" value="{{ key }}">
+                <input type="hidden" name="plaintext" value="{{ result }}">
+                <input type="hidden" name="n" value="{{ n }}">
+                <input type="hidden" name="action" value="chiffrement">
+                <input type="submit" value="Rechiffrer le texte">
+            </form>
+            {% endif %}
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>

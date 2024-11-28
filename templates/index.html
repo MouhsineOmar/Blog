@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encryption & Decryption</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
+  
+</head>
+<body>
+    
+    <form method="post" action="/">
+        <label for="action">Choisir un algorithme</label>
+        <select name="action" required>
+            <option value="multiplication">Multiplication</option>
+            <option value="affine">Affine</option>
+            <option value="vigenere">Vigenère</option>
+            <option value="hill">Hill</option>
+            <option value="transposition">Transposition par colonnes</option>
+            <option value="transposition_simple">Transposition simple</option>
+            <option value="permutation">permutation</option>
+            <option value="aes">AES</option>
+            <option value="rcc4">RC4</option>
+            <option value="rsa">RSA</option>
+            <option value="des">DES</option>
+            <!---
+                
+            -->
+            
+
+
+            
+        </select><br>
+
+        <!-- Add a hidden input field for action -->
+        <input type="hidden" name="action" value="{{ action }}">
+        
+        <input type="submit" value="Choose">
+    </form>
+    <footer>
+        <p>Copyright © 2024 Votre Nom ou Votre Entreprise.</p>
+        <p>Contact : <a href="mailto:votre.email@example.com">votre.email@example.com</a></p>
+    </footer>
+
+
+</body>
+</html>
+
+
+

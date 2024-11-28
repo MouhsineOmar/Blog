@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Algorithme DES</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/cesar-styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Algorithme DES</h1>
+        
+        <form method="post" action="{{ url_for('des') }}">
+            <label for="des_key">Clé DES (16 caractères hexadécimaux) :</label>
+            <input type="text" id="des_key" name="des_key" required><br>
+
+            {% if error_message %}
+                <p style="color: red;">{{ error_message }}</p>
+            {% endif %}
+
+            <label for="texte">Texte à chiffrer/déchiffrer :</label>
+            <input type="text" id="texte" name="texte" required><br>
+
+            <label for="action">Action :</label>
+            <select id="action" name="action" required>
+                <option value="encryption">Chiffrement</option>
+                <option value="decryption">Déchiffrement</option>
+            </select><br>
+
+            <input type="submit" value="Chiffrer/Déchiffrer">
+            <a href="{{ url_for('index') }}" class="back-button">Retour</a>
+        </form>
+
+        {% if resultat %}
+        <div class="result">
+            <h2>Résultat :</h2>
+            <p><br>{{ resultat }}<br></p>
+            {% if action == 'encryption' %}
+            <form method="post" action="{{ url_for('des_decrypt') }}">
+                <input type="hidden" name="texte" value="{{ resultat }}">
+                <input type="hidden" name="des_key" value="{{ des_key }}">
+                <input type="submit" value="Déchiffrer le texte">
+            </form>
+            {% elif action == 'decryption' %}
+            <form method="post" action="{{ url_for('des') }}">
+                <input type="hidden" name="texte" value="{{ resultat }}">
+                <input type="hidden" name="des_key" value="{{ des_key }}">
+                <input type="submit" value="Rechiffrer le texte">
+            </form>
+            {% endif %}
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Algorithme Affine</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/affine-styles.css') }}">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Algorithme Affine</h1>
+        <form method="post" action="{{ url_for('affine') }}">
+            <label for="texte">Texte :</label>
+            <input type="text" name="texte" required>
+            <br>
+            <label for="cle1">Clé 1 :</label>
+            <input type="number" name="cle1" required>
+            <br>
+            <label for="cle2">Clé 2 :</label>
+            <input type="number" name="cle2" required>
+            <br>
+            <label for="action">Action :</label>
+            <select name="action" required>
+                <option value="chiffrement">Chiffrement</option>
+                <option value="dechiffrement">Déchiffrement</option>
+            </select><br>
+            <input type="submit" value="Chiffrer/Déchiffrer">
+            <a href="{{ url_for('index') }}" class="back-button">Retour</a>
+        </form>
+
+        {% if resultat %}
+        <div class="result">
+            <h2>Résultat :</h2>
+            <p><b>{{ resultat }}</b></p>
+            {% if action == 'chiffrement' %}
+            <form method="post" action="{{ url_for('affine_decrypt') }}">
+                <input type="hidden" name="texte" value="{{ resultat }}">
+                <input type="hidden" name="cle1" value="{{ cle1 }}">
+                <input type="hidden" name="cle2" value="{{ cle2 }}">
+                <input type="submit" value="Déchiffrer le texte">
+            </form>
+            {% endif %}
+            {% if action == 'dechiffrement' %}
+            <form method="post" action="{{ url_for('affine') }}">
+                <input type="hidden" name="texte" value="{{ resultat }}">
+                <input type="hidden" name="cle1" value="{{ cle1 }}">
+                <input type="hidden" name="cle2" value="{{ cle2 }}">
+                <input type="submit" value="Rechiffrer le texte">
+            </form>
+            {% endif %}
+        </div>
+        {% endif %}
+    </div>
+</body>
+
+</html>

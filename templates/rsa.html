@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Algorithme RSA</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/hill-styles.css') }}">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Algorithme RSA</h1>
+
+        <form method="post" action="{{ url_for('rsa') }}">
+            <label for="p">Entrer p:</label>
+            <input type="number" name="p" required><br>
+
+            <label for="q">Entrer q:</label>
+            <input type="number" name="q" required><br>
+
+            <label for="e">Entrer e:</label>
+            <input type="number" name="e" required><br>
+
+            <label for="message">Entrer message :</label>
+            <input type="number" name="message" required placeholder="exemple: 88"><br>
+
+            <select name="action" required>
+                <option value="chiffrement">Chiffrement</option>
+                <option value="dechiffrement">Déchiffrement</option>
+            </select>
+            <br>
+
+            <input type="submit" value="Chiffrer/Déchiffrer">
+            <a href="{{ url_for('index') }}" class="back-button">Retour</a>
+        </form>
+
+        {% if result %}
+        <div class="result">
+            <h2>Résultat :</h2>
+            <p><b>{{ result }}</b></p>
+
+            {% if action == 'chiffrement' %}
+            <form method="post" action="{{ url_for('rsa') }}">
+                <input type="hidden" name="p" value="{{ p }}">
+                <input type="hidden" name="q" value="{{ q }}">
+                <input type="hidden" name="e" value="{{ e }}">
+                <input type="hidden" name="message" value="{{ result }}">
+                <input type="hidden" name="action" value="dechiffrement">
+                <input type="submit" value="Déchiffrer le message">
+            </form>
+            {% elif action == 'dechiffrement' %}
+            <form method="post" action="{{ url_for('rsa') }}">
+                <input type="hidden" name="p" value="{{ p }}">
+                <input type="hidden" name="q" value="{{ q }}">
+                <input type="hidden" name="e" value="{{ e }}">
+                <input type="hidden" name="message" value="{{ result }}">
+                <input type="hidden" name="action" value="chiffrement">
+                <input type="submit" value="Rechiffrer le message">
+            </form>
+            {% endif %}
+        </div>
+        {% endif %}
+    </div>
+</body>
+
+</html>
